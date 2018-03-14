@@ -26,16 +26,16 @@ def csv_manipulator(csv_file):
         seasons_count[player_name] += 1
         score_summary[player_name] += ((int(row['pts']) + int(row['reb']) +
                                 int(row['asts']) + int(row['stl']) +
-                                int(row['blk']) - int(row['fga']) +
+                                int(row['blk']) - (int(row['fga']) -
                                 int(row['fgm']) + int(row['fta']) -
-                                int(row['ftm']) + int(row['turnover'])) / int(row['gp']))
+                                int(row['ftm']) + int(row['turnover']))) / int(row['gp']))
     for keys in seasons_count:
         score_summary[keys] /= seasons_count[keys]
     return {k: v for (v, k) in score_summary.items()}
 
 
 def score_sort(score_dict):
-    """[summary]
+    """use the python sorted function to sort the score dictionary
 
     Arguments:
         score_dict {dict} -- keys are scores, values are players' names
